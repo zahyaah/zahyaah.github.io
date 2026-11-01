@@ -36,6 +36,13 @@
   --line: light-dark(rgb(0 0 0 / 0.12), rgb(255 255 255 / 0.16));
   --accent: light-dark(#0066cc, #2997ff);
   --escalate: light-dark(#b25000, #ff9f0a);
+  --li-box: light-dark(#0a66c2, #0a66c2);
+  --li-text: light-dark(#0a66c2, #f5f5f7);
+  --sticker-ink: #1d1d1f;
+  --sticker-lime: #d9ff3f;
+  --sticker-coral: #ff7a59;
+  --sticker-pink: #ffb3d9;
+  --sticker-arrow: light-dark(#c8441f, #ff7a59);
 
   --font: "Source Serif 4", Georgia, "Times New Roman", serif;
   --display: "Gloock", Didot, "Bodoni 72", Georgia, serif;
@@ -347,8 +354,8 @@ code {
   place-items: center;
   min-height: 3rem;
   padding-inline: var(--space-5);
+  border: 1px solid var(--ink); /* A border, not box-shadow, so it survives forced colours. */
   border-radius: var(--radius-btn);
-  box-shadow: inset 0 0 0 1px var(--ink);
   color: var(--ink);
   font-weight: 600;
   transition: background-color 150ms ease-out, color 150ms ease-out, transform 100ms ease-out;
@@ -358,7 +365,6 @@ code {
 
 .btn-primary {
   background: var(--ink);
-  box-shadow: none;
   color: var(--bg);
 }
 
@@ -369,7 +375,10 @@ code {
     text-decoration: none;
   }
 
-  .btn-primary:hover { background: var(--ink-soft); }
+  .btn-primary:hover {
+    background: var(--ink-soft);
+    border-color: var(--ink-soft);
+  }
 }
 
 .stats {
@@ -467,6 +476,7 @@ code {
 
 .points {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-3);
 }
 
@@ -517,6 +527,7 @@ code {
 .flow {
   --dot: 0.75rem;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-5);
   margin-block: var(--space-6);
   view-timeline: --flow block;
@@ -539,6 +550,7 @@ code {
   --rail-from: scaleY(0);
   position: relative;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-5);
 }
 
@@ -576,6 +588,7 @@ code {
 
 .flow-outcomes {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-3);
   margin-inline-start: calc(var(--dot) / 2 - 1px);
   padding-inline-start: calc(var(--space-5) - var(--dot) / 2 + 1px);
@@ -817,6 +830,7 @@ code {
 .bars-lead td::before { background: var(--accent); }
 
 .cycle {
+  --head: 0.375rem;
   position: relative;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -845,12 +859,14 @@ code {
   transform: translateY(-50%);
 }
 
-/* The return path: verifier back to planner, ending in an arrowhead. */
+/* The return path: verifier back to planner. The padding above is the distance
+   to cover: the line stops one arrowhead short, so the tip touches the tile edge.
+   The extra 1px runs under the arrowhead so fractional layouts show no seam. */
 .cycle::after {
   content: "";
   position: absolute;
   inset: auto calc(100% / 6) 0;
-  height: calc(var(--space-5) - 0.125rem);
+  height: calc(var(--space-5) - var(--head) + 1px);
   border: 2px solid var(--ink-2);
   border-block-start: 0;
   border-radius: 0 0 0.5rem 0.5rem;
@@ -860,10 +876,10 @@ code {
   content: "";
   position: absolute;
   z-index: 1;
-  inset-block-end: calc(var(--space-5) - 0.125rem);
+  inset-block-end: calc(var(--space-5) - var(--head));
   inset-inline-start: calc(100% / 6 - 0.3125rem + 1px);
   border-inline: 0.3125rem solid transparent;
-  border-block-end: 0.375rem solid var(--ink-2);
+  border-block-end: var(--head) solid var(--ink-2);
 }
 
 .figures {
@@ -892,6 +908,12 @@ code {
 @media (max-width: 24rem) {
   .visual { padding: var(--space-4); }
   .figures, .figures-row { grid-template-columns: 1fr; }
+
+  .bars th {
+    width: 45%;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
 
   .cycle {
     column-gap: var(--space-3);
@@ -944,11 +966,15 @@ code {
 
 .credentials {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--space-4);
   margin-block-start: var(--space-4);
 }
 
-.credentials .tile { padding: clamp(var(--space-5), 3.4vw, var(--space-6)); }
+.credentials .tile {
+  padding: clamp(var(--space-5), 3.4vw, var(--space-6));
+  overflow-wrap: anywhere;
+}
 
 .credentials h2 {
   color: var(--ink-2);
@@ -963,7 +989,7 @@ code {
 }
 
 @media (min-width: 48rem) {
-  .credentials { grid-template-columns: 1fr 1fr; }
+  .credentials { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 /* ==========================================================================
@@ -971,32 +997,101 @@ code {
    ========================================================================== */
 .contact h2 { max-width: 16em; }
 
-.contact-email {
-  display: inline-block;
-  margin-block-start: var(--space-6);
-  font-size: var(--text-lg);
-  font-weight: 700;
-  overflow-wrap: anywhere;
-}
+/* Pulls the first logo's button padding and border out, so the logo itself lines
+   up with the text edge. */
+.contact .actions { margin-inline-start: calc((var(--space-3) + 1px) * -1); }
 
-.contact-links {
-  display: flex;
-  gap: var(--space-5);
-  margin-block-start: var(--space-2);
-  font-weight: 700;
-}
-
-.contact-links a {
-  display: inline-grid;
-  place-items: center;
-  min-height: 2.75rem;
-}
+.contact { padding-block-end: clamp(4rem, 9vw, 7.5rem); }
 
 .contact-place {
-  margin-block-start: var(--space-2);
-  margin-block-end: clamp(4rem, 9vw, 7.5rem);
+  margin-block-start: var(--space-5);
   color: var(--ink-2);
 }
+
+/* Below 48rem each lead-in takes its own line, so "Coimbatore" always starts a
+   line at the left edge in any language or text size. The note then always has
+   room, and it sits in the gap under "Open to". */
+.based { display: block; }
+
+.open {
+  display: block;
+  margin-block-end: calc(var(--space-8) + var(--space-1));
+}
+
+@media (min-width: 48rem) {
+  .contact-place { margin-block-start: calc(var(--space-8) + var(--space-1)); }
+
+  .based,
+  .open { display: inline; }
+
+  .open { margin-block-end: 0; }
+}
+
+.hometown {
+  position: relative;
+  white-space: nowrap;
+}
+
+.hometown-note {
+  position: absolute;
+  inset-block-end: 100%;
+  inset-inline-start: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-1);
+  color: var(--ink);
+  font-family: var(--display);
+  line-height: 1.2;
+}
+
+.hometown-note svg { flex: none; }
+
+.hometown-note path {
+  fill: none;
+  stroke: var(--sticker-arrow);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.hometown-note span { rotate: -4deg; }
+
+/* Very narrow screens: the note wraps to two lines so the page cannot scroll. */
+@media (max-width: 20rem) {
+  .hometown-note {
+    inset-inline-start: 0;
+    width: max-content;
+    max-width: calc(100vw - 2 * var(--gutter));
+  }
+
+  .hometown-note span {
+    min-width: 0;
+    white-space: normal;
+  }
+}
+
+/* Overseas options, on purpose the loudest thing on the page. Each sticker has
+   its own tilt, and the corner radii are uneven so the edges look hand-cut. */
+.overseas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin-block-start: var(--space-4);
+}
+
+.sticker {
+  padding: var(--space-1) var(--space-3);
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  color: var(--sticker-ink);
+  font-family: var(--display);
+  font-size: var(--text-lg);
+  line-height: 1.25;
+}
+
+.sticker-gulf { background: var(--sticker-lime); rotate: -1.5deg; }
+.sticker-spain { background: var(--sticker-coral); rotate: 1.25deg; }
+.sticker-japan { background: var(--sticker-pink); rotate: -0.75deg; }
 
 .foot {
   display: flex;
@@ -1020,20 +1115,61 @@ code {
   animation-timing-function: ease;
 }
 
+/* Link icons are inline SVG, so they work from any location, print, and take the
+   link's colour in both themes and on hover. These links are grids, so the icon
+   needs a column to sit beside the label. */
+.icon {
+  width: 1.125em;
+  height: 1.125em;
+  margin-inline-end: 0.4em;
+  fill: currentColor;
+}
+
+a:has(> .icon) { grid-auto-flow: column; }
+
+/* Email, GitHub, and LinkedIn links show the logo alone. Hidden text keeps their names. */
+.icon-only { min-width: 2.75rem; }
+
+.icon-only .icon {
+  width: 1.5em;
+  height: 1.5em;
+  margin-inline-end: 0;
+}
+
+.btn.icon-only {
+  padding-inline: var(--space-3);
+  border-color: transparent;
+}
+
+/* The LinkedIn logo is a 4:1 wordmark. It keeps its blue box in both themes, and
+   its lettering turns light in dark theme, where blue text is too dim on black. */
+.icon-only .icon-wordmark {
+  width: 5.25em;
+  height: 1.3125em;
+}
+
+/* Overflow stops pixel rounding from clipping the logo's right corners. */
+.icon-wordmark,
+#icon-linkedin { overflow: visible; }
+
+/* Logo buttons have no outline, so hover is a soft tint behind the logo. */
+@media (hover: hover) {
+  .btn.icon-only:hover {
+    background: var(--line);
+    color: var(--ink);
+  }
+}
+
 /* Text links get the same press response as .btn. */
-.links a,
-.contact-links a,
-.contact-email {
+.links a {
   transition: transform 100ms ease-out;
 }
 
-.links a:active,
-.contact-links a:active,
-.contact-email:active {
+.links a:active {
   transform: scale(0.97);
 }
 
-@media (prefers-reduced-motion: no-preference) {
+@media screen and (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 
   @supports (animation-timeline: view()) {
@@ -1071,6 +1207,33 @@ code {
       animation-range: cover 45% cover 50%;
     }
 
+    /* Contact sits at the page end, where cover ranges may never finish, so these
+       use entry ranges. The rem offsets stretch the motion over more scroll, because
+       these elements are short, and all of it ends before the page does. The 5rem
+       inset keeps the motion clear of the phone tab bar. */
+    .hometown-note svg,
+    .hometown-note span,
+    .sticker {
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-timeline: view(block 0 5rem);
+    }
+
+    .hometown-note svg {
+      animation-name: draw-down;
+      animation-range: entry 0% entry calc(100% + 4rem);
+    }
+
+    .hometown-note span {
+      animation-name: reveal;
+      animation-range: entry calc(100% + 2.5rem) entry calc(100% + 5rem);
+    }
+
+    .sticker { animation-name: slap; }
+    .sticker-gulf { animation-range: entry 0% entry calc(100% + 1.25rem); }
+    .sticker-spain { animation-range: entry 1rem entry calc(100% + 2.25rem); }
+    .sticker-japan { animation-range: entry 2rem entry calc(100% + 3.25rem); }
+
     @keyframes rail {
       from { transform: var(--rail-from); }
       to { transform: none; }
@@ -1081,9 +1244,24 @@ code {
       to { opacity: 1; }
     }
 
+    /* -1px keeps the rounded corners whole when the box lands on a fraction. */
     @keyframes return-path {
-      from { clip-path: inset(0 0 0 100%); }
+      from { clip-path: inset(-1px -1px -1px 100%); }
+      to { clip-path: inset(-1px); }
+    }
+
+    @keyframes draw-down {
+      from { clip-path: inset(0 0 100% 0); }
       to { clip-path: inset(0); }
+    }
+
+    /* No "to" frame: each sticker settles at the tilt set on its own class. */
+    @keyframes slap {
+      from {
+        opacity: 0;
+        rotate: 0deg;
+        scale: 0.95;
+      }
     }
   }
 }
@@ -1152,4 +1330,35 @@ code {
   .bar::before { background: var(--bg); }
   .nav { background: var(--surface); }
   .tile { box-shadow: inset 0 0 0 1px var(--line); }
+}
+
+/* ==========================================================================
+   Print and Save as PDF
+   ========================================================================== */
+@media print {
+  :root,
+  :root[data-theme="dark"],
+  .tile-dark { color-scheme: light; }
+
+  .bar { display: none; }
+
+  body { padding-bottom: 0; }
+
+  .btn-primary {
+    background: none;
+    color: var(--ink);
+  }
+
+  /* Paper has no mail link, so the address hidden on screen prints here. */
+  .contact a[href^="mailto:"] .vh {
+    position: static;
+    width: auto;
+    height: auto;
+    margin-inline-start: 0.25em;
+    overflow: visible;
+    clip-path: none;
+    white-space: normal;
+  }
+
+  .sticker { print-color-adjust: exact; }
 }
