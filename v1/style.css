@@ -55,3 +55,30 @@ div p:hover {
 .connect #instagram #twitter #linkedin #github {
     
 }
+
+.version-label {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 1;
+    padding: 4px 10px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: ghostwhite;
+    color: black;
+    font-family: system-ui, sans-serif;
+    font-size: 13px;
+}
+
+@media (max-width: 40rem) {
+    .version-label {
+        position: static;
+        display: block;
+        width: fit-content;
+        margin: 12px auto 0;
+    }
+
+    .connect {
+        flex-wrap: wrap;
+    }
+}
