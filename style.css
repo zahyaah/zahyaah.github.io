@@ -918,50 +918,6 @@ code {
 }
 
 /* ==========================================================================
-   Client work
-   ========================================================================== */
-.clients {
-  display: grid;
-  gap: var(--space-4);
-  margin-block-start: var(--space-6);
-}
-
-/* Column layout pins each Live link to the tile's bottom edge, so paired
-   tiles line up however much copy they hold. */
-.client {
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.client img {
-  width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-}
-
-.client-copy {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: var(--space-5);
-}
-
-.client-copy .links {
-  margin-block-start: auto;
-  padding-block-start: var(--space-4);
-}
-
-.client-copy > p:not(.tile-sub, .links) {
-  margin-block-start: var(--space-3);
-  color: var(--ink-soft);
-}
-
-@media (min-width: 48rem) {
-  .clients { grid-template-columns: 1fr 1fr; }
-}
-
-/* ==========================================================================
    Skills, certifications, education
    ========================================================================== */
 .sheet {
