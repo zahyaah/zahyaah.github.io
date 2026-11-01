@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>K Zayd Ahmed · AI Engineer</title>
+  <meta name="description" content="AI Engineer building production LLM agents, and the evals, guardrails, and tests that keep them honest.">
+  <link rel="canonical" href="https://zahyaah.github.io/">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f5f7">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000000">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://zahyaah.github.io/">
+  <meta property="og:title" content="K Zayd Ahmed · AI Engineer">
+  <meta property="og:description" content="I build production AI agents that real teams depend on, and the evals, guardrails, and tests that keep them honest.">
+  <meta property="og:image" content="https://zahyaah.github.io/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="K Zayd Ahmed, AI Engineer. Agentic Systems and LLM Backends.">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/gloock-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/source-serif-4-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    // The only script on the page: applies and persists the theme choice.
+    // It runs inline, before first paint, so a saved theme never flashes.
+    (function () {
+      var root = document.documentElement;
+      var metas = document.getElementsByName('theme-color');
+
+      function apply(theme) {
+        root.dataset.theme = theme;
+        for (var i = 0; i < metas.length; i++) {
+          metas[i].content = theme === 'dark' ? '#000000' : '#f5f5f7';
+        }
+      }
+
+      root.classList.add('js');
+      try {
+        var saved = localStorage.getItem('theme');
+        if (saved === 'light' || saved === 'dark') apply(saved);
+      } catch (e) {}
+
+      document.addEventListener('click', function (event) {
+        if (!event.target.closest('[data-theme-toggle]')) return;
+        var dark = root.dataset.theme
+          ? root.dataset.theme === 'dark'
+          : matchMedia('(prefers-color-scheme: dark)').matches;
+        var next = dark ? 'light' : 'dark';
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        if (document.startViewTransition) {
+          document.startViewTransition(function () { apply(next); });
+        } else {
+          apply(next);
+        }
+      });
+    })();
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar">
+    <div class="bar-inner wrap">
+      <a class="brand" href="#top">K Zayd Ahmed</a>
+      <nav class="nav" aria-label="Sections">
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light and dark theme">
+        <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
+          <circle cx="10" cy="10" r="7.25" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10 2.75a7.25 7.25 0 0 1 0 14.5z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <section class="hero wrap" id="top">
+      <h1>K Zayd Ahmed</h1>
+      <p class="role">AI Engineer · Agentic Systems &amp; LLM Backends</p>
+      <p class="stats"><strong>AZ-204</strong> certified (Azure Developer Associate)</p>
+      <p class="lede">I build production AI agents that real teams depend on, <span>and the evals, guardrails, and tests that keep them honest.</span></p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#projects">View Projects</a>
+        <a class="btn" href="assets/K-Zayd-Ahmed-Resume.pdf" download>Download Resume</a>
+        <a class="btn" href="#contact">Contact</a>
+      </div>
+    </section>
+
+    <div class="scope scope-about">
+      <section class="section wrap" id="about" aria-labelledby="about-title">
+        <h2 id="about-title">About</h2>
+        <div class="prose">
+          <p>I'm a Software Engineer at Capgemini in Bengaluru, where I design, build, and support a production LLM agent platform used by 14 application teams. My work sits between the model and the business: I run demos and requirement calls with clients, turn their workflows into agent behavior, and own the system after it ships.</p>
+          <p>I care most about the unglamorous parts of AI engineering: evaluation, failure modes, guardrails, and knowing when a deterministic rule beats a model call. Outside work, I build projects that go deep on agent evaluation, retrieval quality, and computer vision in the browser.</p>
+          <p class="note"><strong>Currently learning:</strong> AWS Bedrock, AWS AgentCore, RAGAS, MCP.</p>
+        </div>
+      </section>
+
+      <section class="section wrap" id="what-i-do" aria-labelledby="what-title">
+        <h2 id="what-title">What I Do</h2>
+        <div class="areas">
+          <article>
+            <h3>Agentic AI</h3>
+            <p>Multi-step LangGraph and AutoGen agents with tool calling, state, checkpointing, and human escalation.</p>
+          </article>
+          <article>
+            <h3>LLM Evaluation</h3>
+            <p>Golden test sets, regression gates in CI, LLM-as-judge with calibration, cost and latency tracing.</p>
+          </article>
+          <article>
+            <h3>Retrieval (RAG)</h3>
+            <p>Vector and hybrid retrieval, rerankers, and measuring whether it actually helps (nDCG, MRR).</p>
+          </article>
+          <article>
+            <h3>Backend &amp; Cloud</h3>
+            <p>Python, FastAPI, REST APIs, Azure (Functions, Logic Apps, Blob Storage, Cosmos DB), Docker, GitHub Actions.</p>
+          </article>
+          <article>
+            <h3>Client Delivery</h3>
+            <p>Live demos, requirement gathering, onboarding teams, troubleshooting in production.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <div class="scope scope-experience">
+      <section class="section wrap" id="experience" aria-labelledby="experience-title">
+        <h2 id="experience-title">Experience</h2>
+        <header class="job">
+          <h3>Software Engineer - Agentic AI, Capgemini</h3>
+          <p>Bengaluru · July 2025 – Present</p>
+        </header>
+
+        <article class="tile tile-dark copilot">
+          <h4>Triage Copilot</h4>
+          <p class="tile-sub">Production LLM agent</p>
+
+          <figure class="flow">
+            <ol class="flow-steps">
+              <li><b>Request</b><span>From one of 14 application teams</span></li>
+              <li><b>Routing</b><span>235 deterministic rules</span></li>
+              <li><b>Agent</b><span>9-node LangGraph state machine</span></li>
+              <li><b>Guardrails</b><span>JSON schema, rule override, confidence floor</span></li>
+            </ol>
+            <ul class="flow-outcomes">
+              <li><b>Confident</b><span>Answer reaches the team</span></li>
+              <li class="flow-escalate"><b>Uncertain</b><span>Escalates to a human</span></li>
+            </ul>
+            <figcaption>Simplified request path.</figcaption>
+          </figure>
+
+          <ul class="points points-columns">
+            <li>Designed, built, deployed, and support a 9-node LangGraph agent in Python and FastAPI on Azure that replaced a fully manual triage process for <strong>14 application teams</strong>.</li>
+            <li>Built guardrails: JSON schema-validated structured outputs, a rule override, and a confidence floor that escalates uncertain answers to a human.</li>
+            <li>Measured an embedding retrieval layer against production data and replaced it with <strong>235 deterministic rules</strong>, cutting LLM calls and improving reliability, cost, and auditability.</li>
+            <li>Fixed a production concurrency bug (duplicate records under retries) with an atomic compare-and-swap on Azure Blob Storage.</li>
+            <li><strong>303 automated tests</strong> gate CI/CD, plus a live cost and latency dashboard per run.</li>
+          </ul>
+        </article>
+
+        <div class="work">
+          <article>
+            <h4>Multi-agent platform PoCs</h4>
+            <p>Built an Inbox Triage Agent and an Incident Orchestration Agent for a platform that lets non-technical teams build AI workflows, offsetting roughly two people's manual triage work.</p>
+          </article>
+          <article>
+            <h4>Inventory risk pipeline</h4>
+            <p>Built a pipeline over <strong>265,000+ records</strong> with EOQ-based purchase orders and GPT-4 summaries, plus a RAG pipeline on Milvus.</p>
+          </article>
+          <article>
+            <h4>Automation</h4>
+            <p>Azure Logic Apps and Functions behind REST APIs with Redis-cached authorization, removing every manual step for a 100+ user cohort.</p>
+          </article>
+          <article>
+            <h4>Client-facing</h4>
+            <p>Demos to the client and leadership, requirement calls with client and app teams, and direct onboarding of application teams.</p>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <div class="scope scope-projects">
+      <section class="section wrap" id="projects" aria-labelledby="projects-title">
+        <h2 id="projects-title">Featured Projects</h2>
+        <div class="bento">
+
+          <article class="tile project span-12 split">
+            <div class="project-copy">
+              <h3>Tripwire</h3>
+              <p class="tile-sub">AI Agent Evaluation &amp; Regression Gating Harness</p>
+              <ul class="points">
+                <li>Asserts <strong>60 golden cases (15 adversarial)</strong> on a tool-using triage agent: tool call order, arguments, forbidden calls, and cost budgets.</li>
+                <li>Record-and-replay LLM gateway makes CI reruns deterministic and free; <strong>237 offline tests</strong>.</li>
+                <li>LLM-as-judge with calibration stats (Cohen's kappa, bootstrap intervals): an unreliable judge can report but never block a merge.</li>
+                <li>Typed trace spans (latency, tokens, cost) found a hidden reasoning-token gap in billed usage.</li>
+              </ul>
+              <p class="status">Harness built and tested. Golden-set results pending a full recorded run.</p>
+              <ul class="tags" aria-label="Stack">
+                <li>Python</li><li>Pydantic</li><li>pytest</li><li>GitHub Actions</li><li>Gemini API</li>
+              </ul>
+              <p class="links"><a href="https://github.com/zahyaah/tripwire" target="_blank" rel="noopener">GitHub<span class="vh"> repository for Tripwire</span></a></p>
+            </div>
+            <figure class="visual">
+              <ol class="ladder">
+                <li><b>corpus</b><span>synthetic inbox</span></li>
+                <li><b>golden set</b><span>60 cases, 15 adversarial</span></li>
+                <li><b>agent loop</b><span>the agent under test</span></li>
+                <li><b>trace</b><span>append-only JSONL</span></li>
+                <li><b>checks</b><span>assertions, judge, cost</span></li>
+                <li class="ladder-gate"><b>gate</b><span>non-zero exit on regression</span></li>
+              </ol>
+              <figcaption><code>tripwire gate --run latest --baseline baselines/main.json</code></figcaption>
+            </figure>
+          </article>
+
+          <article class="tile project span-7">
+            <div class="project-copy">
+              <h3>Braid</h3>
+              <p class="tile-sub">Hybrid Retrieval Engine with a Fine-Tuned Reranker</p>
+              <p class="finding"><strong>Honest finding:</strong> hybrid did not beat dense retrieval alone.</p>
+            </div>
+            <figure class="visual">
+              <table class="bars">
+                <caption>Pooled nDCG@10, higher is better</caption>
+                <thead class="vh">
+                  <tr><th scope="col">Configuration</th><th scope="col">nDCG@10</th></tr>
+                </thead>
+                <tbody>
+                  <tr class="bars-lead"><th scope="row">dense</th><td style="--v: 0.832"><span>0.832</span></td></tr>
+                  <tr><th scope="row">fused + rerank</th><td style="--v: 0.829"><span>0.829</span></td></tr>
+                  <tr><th scope="row">fused + fine-tuned</th><td style="--v: 0.805"><span>0.805</span></td></tr>
+                  <tr><th scope="row">bm25</th><td style="--v: 0.583"><span>0.583</span></td></tr>
+                  <tr><th scope="row">fused</th><td style="--v: 0.516"><span>0.516</span></td></tr>
+                </tbody>
+              </table>
+              <figcaption>Fused + rerank vs dense: −0.003, 95% CI [−0.042, +0.035].</figcaption>
+            </figure>
+            <div class="project-copy">
+              <ul class="points">
+                <li>Fuses BM25, BGE embeddings, and spaCy entity graphs, then reranks with a fine-tuned cross-encoder behind a leakage guard.</li>
+                <li>Evaluated on <strong>180 labeled queries</strong> with nDCG, MRR, and bootstrap confidence intervals.</li>
+              </ul>
+              <ul class="tags" aria-label="Stack">
+                <li>Python</li><li>Sentence Transformers</li><li>spaCy</li><li>FAISS</li><li>OpenSearch</li><li>Neo4j</li><li>Docker</li>
+              </ul>
+              <p class="links"><a href="https://github.com/zahyaah/braid" target="_blank" rel="noopener">GitHub<span class="vh"> repository for Braid</span></a></p>
+            </div>
+          </article>
+
+          <article class="tile project span-5">
+            <div class="project-copy">
+              <h3>Reasoning Agent Selfcheck</h3>
+              <p class="tile-sub">Multi-Step Agent with Verification</p>
+            </div>
+            <figure class="visual">
+              <ol class="cycle">
+                <li>Planner</li>
+                <li>Executor</li>
+                <li>Verifier</li>
+              </ol>
+              <figcaption>Failed-check critiques feed the next retry.</figcaption>
+            </figure>
+            <div class="project-copy">
+              <ul class="points">
+                <li>Planner → executor → verifier loop; failed-check critiques feed into retries so the agent self-corrects.</li>
+                <li>Cuts arithmetic hallucination: the LLM emits expressions, and an AST-allowlisted evaluator recomputes them.</li>
+                <li>Provider-agnostic interface across Claude, Gemini, and OpenRouter; <strong>217 offline tests</strong>.</li>
+              </ul>
+              <ul class="tags" aria-label="Stack">
+                <li>Python</li><li>Anthropic API (Claude)</li><li>Gemini API</li><li>OpenRouter</li><li>unittest</li>
+              </ul>
+              <p class="links"><a href="https://github.com/zahyaah/reasoning-agent-selfcheck" target="_blank" rel="noopener">GitHub<span class="vh"> repository for Reasoning Agent Selfcheck</span></a></p>
+            </div>
+          </article>
+
+          <article class="tile project span-5">
+            <div class="project-copy">
+              <h3>At Most Once</h3>
+              <p class="tile-sub">Idempotent REST API Under Concurrency</p>
+            </div>
+            <figure class="visual">
+              <ul class="figures">
+                <li><strong>0</strong> duplicate rows</li>
+                <li><strong>143,689</strong> requests</li>
+                <li><strong>400</strong> requests/second</li>
+                <li><strong>86.6 ms</strong> median p99</li>
+              </ul>
+            </figure>
+            <div class="project-copy">
+              <ul class="points">
+                <li>Exactly-once writes with idempotency keys on a MySQL unique constraint, plus optimistic locking.</li>
+                <li>Load-tested over six 60-second runs. p99 ranged from 23.6 to 394.9 ms, so the range is reported too.</li>
+              </ul>
+              <ul class="tags" aria-label="Stack">
+                <li>TypeScript</li><li>Node.js</li><li>Express</li><li>MySQL</li><li>React</li><li>TanStack Query</li><li>k6</li><li>Docker</li><li>GitHub Actions</li>
+              </ul>
+              <p class="links"><a href="https://github.com/zahyaah/at-most-once" target="_blank" rel="noopener">GitHub<span class="vh"> repository for At Most Once</span></a></p>
+            </div>
+          </article>
+
+          <article class="tile project span-7">
+            <div class="project-copy">
+              <h3>SnapVector</h3>
+              <p class="tile-sub">Computer Vision Segmentation in the Browser</p>
+            </div>
+            <figure class="visual visual-image">
+              <img src="assets/snapvector.png" width="1152" height="822" loading="lazy" decoding="async" alt="SnapVector app with a rough red loop drawn around a blue circle on the left and the resulting SVG cutout on the right.">
+            </figure>
+            <div class="project-copy">
+              <ul class="points">
+                <li>Draw a rough loop around an object; MobileSAM segments it and exports a clean SVG.</li>
+                <li>Runs fully client-side, so no image reaches a server and hosting costs nothing.</li>
+                <li>Initial JS about <strong>10 KB gzipped</strong>; cached reload <strong>669 ms</strong>.</li>
+              </ul>
+              <ul class="tags" aria-label="Stack">
+                <li>TypeScript</li><li>ONNX Runtime Web</li><li>WebAssembly</li><li>MobileSAM</li><li>Vite</li>
+              </ul>
+              <p class="links">
+                <a href="https://snapvector.vercel.app" target="_blank" rel="noopener">Live<span class="vh"> SnapVector app</span></a>
+                <a href="https://github.com/zahyaah/SnapVector" target="_blank" rel="noopener">GitHub<span class="vh"> repository for SnapVector</span></a>
+              </p>
+            </div>
+          </article>
+
+          <article class="tile project span-12 split">
+            <div class="project-copy">
+              <h3>Urban Cart</h3>
+              <p class="tile-sub">Full-Stack E-commerce with Stripe</p>
+              <ul class="points">
+                <li>Stripe checkout behind an idempotency key, so a double-submitted checkout creates one order.</li>
+                <li>Race-safe cart merges under REPEATABLE READ; k6 found and fixed an exhausted rate limiter.</li>
+              </ul>
+              <ul class="tags" aria-label="Stack">
+                <li>React</li><li>TypeScript</li><li>Redux Toolkit</li><li>Fastify</li><li>PostgreSQL (Drizzle ORM)</li><li>Redis</li><li>Stripe</li><li>k6</li><li>Docker</li>
+              </ul>
+              <p class="links"><a href="https://github.com/zahyaah/UrbanCart" target="_blank" rel="noopener">GitHub<span class="vh"> repository for Urban Cart</span></a></p>
+            </div>
+            <figure class="visual">
+              <ul class="figures figures-row">
+                <li><strong>2</strong> submits</li>
+                <li><strong>1</strong> idempotency key</li>
+                <li><strong>1</strong> order</li>
+              </ul>
+            </figure>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="section wrap" id="client-work" aria-labelledby="client-title">
+        <h2 id="client-title">Client Work</h2>
+        <p class="section-sub">Freelance web.</p>
+        <div class="clients">
+          <article class="tile client">
+            <img src="assets/cafe-locus.jpg" width="1440" height="900" loading="lazy" decoding="async" alt="Cafe Locus home page with the LOCUS wordmark under line-drawn pendant lamps.">
+            <div class="client-copy">
+              <h3>Cafe Locus</h3>
+              <p class="tile-sub">Marketing Website</p>
+              <p>Animated marketing site with GSAP, Lenis smooth scrolling, and a fox mascot animation. Custom LOCUS wordmark, warm oxblood dark mode where only the pendant bulbs emit light, self-hosted typography.</p>
+              <p class="links"><a href="https://cafelocus-pi.vercel.app" target="_blank" rel="noopener">Live<span class="vh"> Cafe Locus website</span></a></p>
+            </div>
+          </article>
+          <article class="tile client">
+            <img src="assets/nut-cafe.jpg" width="1440" height="900" loading="lazy" decoding="async" alt="Nut Cafe and Lounge home page with the headline A slow room for good coffee over a photo of the interior.">
+            <div class="client-copy">
+              <h3>Nut Cafe and Lounge, Sharjah</h3>
+              <p class="tile-sub">Website</p>
+              <p>Deployed on Cloudflare Workers.</p>
+              <p class="links"><a href="https://nut-cafe-and-lounge-sharjah.itszayd2003.workers.dev" target="_blank" rel="noopener">Live<span class="vh"> Nut Cafe and Lounge website</span></a></p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <div class="scope scope-skills">
+      <section class="section wrap" id="skills" aria-labelledby="skills-title">
+        <h2 id="skills-title">Skills</h2>
+        <dl class="tile sheet">
+          <div><dt>Languages</dt><dd><ul class="tags"><li>Python</li><li>TypeScript</li><li>JavaScript</li><li>SQL</li></ul></dd></div>
+          <div><dt>AI &amp; Agents</dt><dd><ul class="tags"><li>LangGraph</li><li>LangChain</li><li>AutoGen</li><li>Azure OpenAI</li><li>Claude</li><li>Gemini</li><li>Tool Calling</li><li>RAG</li><li>Prompt Engineering</li></ul></dd></div>
+          <div><dt>Evaluation</dt><dd><ul class="tags"><li>Golden sets</li><li>LLM-as-judge</li><li>Regression gating</li><li>nDCG / MRR</li><li>Tracing</li></ul></dd></div>
+          <div><dt>Retrieval &amp; ML</dt><dd><ul class="tags"><li>Milvus</li><li>FAISS</li><li>OpenSearch</li><li>Neo4j</li><li>Sentence Transformers</li><li>spaCy</li><li>MobileSAM</li><li>ONNX Runtime Web</li></ul></dd></div>
+          <div><dt>Backend</dt><dd><ul class="tags"><li>FastAPI</li><li>Pydantic</li><li>REST APIs</li><li>Node.js</li><li>Express</li><li>Fastify</li></ul></dd></div>
+          <div><dt>Data</dt><dd><ul class="tags"><li>PostgreSQL</li><li>MySQL</li><li>Redis</li><li>Azure Cosmos DB</li><li>Azure Blob Storage</li></ul></dd></div>
+          <div><dt>Cloud &amp; DevOps</dt><dd><ul class="tags"><li>Azure (Functions, Logic Apps, App Service, Key Vault, AI Foundry)</li><li>Docker</li><li>GitHub Actions</li><li>pytest</li><li>k6</li></ul></dd></div>
+          <div><dt>Frontend</dt><dd><ul class="tags"><li>React</li><li>Redux Toolkit</li><li>TanStack Query</li><li>Vite</li><li>GSAP</li></ul></dd></div>
+        </dl>
+      </section>
+
+      <div class="wrap credentials">
+        <section class="tile" id="certifications" aria-labelledby="cert-title">
+          <h2 id="cert-title">Certifications</h2>
+          <p class="credential">Microsoft Certified: Azure Developer Associate (AZ-204)</p>
+          <p class="tile-sub">Credential ID <code>B7A2F586F1CD56DB</code></p>
+          <p class="tile-sub">Expires December 2026</p>
+        </section>
+        <section class="tile" id="education" aria-labelledby="education-title">
+          <h2 id="education-title">Education</h2>
+          <p class="credential">B.Tech, Computer Science and Engineering</p>
+          <p class="tile-sub">CMR College of Engineering and Technology, Hyderabad</p>
+          <p class="tile-sub">July 2025 · GPA 7.83</p>
+        </section>
+      </div>
+    </div>
+
+    <div class="scope scope-contact">
+      <section class="section contact wrap" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title">Building something with agents, or need one evaluated properly? Let's talk.</h2>
+        <a class="contact-email" href="mailto:itszayd2003@gmail.com">itszayd2003@gmail.com</a>
+        <ul class="contact-links">
+          <li><a href="https://github.com/zahyaah" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/k-zayd-ahmed-b36751170" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+        <p class="contact-place">Bengaluru, India · open to Bengaluru, Hyderabad, Coimbatore, or remote</p>
+      </section>
+    </div>
+  </main>
+
+  <footer class="foot wrap">
+    <p>© 2026 K Zayd Ahmed</p>
+    <p>This is v2. <a href="v1/">See v1</a>, the college version.</p>
+  </footer>
+</body>
+</html>
